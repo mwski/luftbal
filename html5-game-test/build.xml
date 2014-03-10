@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." name="TemperatureLogger" xmlns:ivy="antlib:org.apache.ivy.ant">
+	
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.7"/>
+    <property name="source" value="1.7"/>
+	
+	<property environment="env"/>
+	<property name="ivy.home" value="${env.IVY_HOME}"/>
+
+	<property name="dir.src" value="src"/>
+	<property name="dir.src.test" value="junit"/>
+	<property name="dir.jar" value="build/jar"/>
+	<property name="dir.classes" value="build/classes"/>
+	<property name="dir.libs" value="lib"/>
+	<property name="dir.libs" value="${ivy.home}"/>
+	<property name="dir.libs.pattern" value="${dir.libs}/[type]s/[artifact]-[revision].[ext]"/>
+	<property name="dir.libs.native" value="dll"/>
+    
+	<path id="classpath">
+		<fileset dir="${dir.libs}" id="ext-jars">
+	    	<include name="**/*.jar"/>
+		</fileset>
+		<fileset dir="${dir.libs.native}" id="dlls">
+	    	<include name="**/*.dll"/>
+		</fileset>
+	</path>
+	
+	<taskdef resource="org/apache/ivy/ant/antlib.xml">
+	    <classpath>
+	        <fileset dir="${ivy.home}">
+	            <include name="*.jar"/>
+	        </fileset>
+	    </classpath>
+	</taskdef>
+	
+	<!-- ================================= 
+          target: clean              
+         ================================= -->	
+	<target name="clean" description="clean">
+        <delete dir="${dir.jar}"/>
+        <delete dir="${dir.classes}"/>
+    </target>
+	
+	<!-- ================================= 
+          target: resolve              
+         ================================= -->
+    <target name="resolve" description="Ivy resolve">
+        <ivy:resolve />
+    	<ivy:retrieve sync="true" type="jar,bundle,source" pattern="${dir.libs.pattern}"/>
+    </target>
+	
+</project>
