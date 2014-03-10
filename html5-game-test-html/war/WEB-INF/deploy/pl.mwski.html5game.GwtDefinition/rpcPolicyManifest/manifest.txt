@@ -1,0 +1,2 @@
+# Module pl.mwski.html5game.GwtDefinition
+# RPC service class, partial path of RPC policy file
