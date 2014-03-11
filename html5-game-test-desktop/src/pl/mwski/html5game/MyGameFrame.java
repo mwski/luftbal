@@ -81,10 +81,15 @@ public class MyGameFrame extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (GameTopMenu.AC_M_PAUSE.equals(e.getActionCommand())) {
+		switch (e.getActionCommand()) {
+		case GameTopMenu.AC_M_PAUSE:
 			game.setPaused(gameTopMenu.isJMenuItemPausedSelected());
-		} else if (GameTopMenu.AC_M_QUIT.equals(e.getActionCommand())) {
+			break;
+		case GameTopMenu.AC_M_QUIT:
 			dispose();
+			break;
+		default:
+			break;
 		}
 	}
 
